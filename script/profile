@@ -6,7 +6,7 @@ function _ssm_profile {
   #export ANSIBLE_ROLES_PATH="$shome/roles${ANSIBLE_ROLES_PATH:+:${ANSIBLE_ROLES_PATH}}"
   #export ANSIBLE_LIBRARY="$shome/library${ANSIBLE_LIBRARY:+:${ANSIBLE_LIBRARY}}"
 
-  SSM_VERSION='0.0.1'
+  SSM_VERSION='2.0.879.0'
 }
 
 _ssm_profile

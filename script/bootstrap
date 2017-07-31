@@ -4,7 +4,27 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  uname -a
+  rm -rf "$shome/vendor"
+  mkdir -p "$shome/vendor/src/github.com/aws"
+  git clone https://github.com/aws/amazon-ssm-agent $shome/vendor/src/github.com/aws/amazon-ssm-agent || true
+  pushd "$shome/vendor/src/github.com/aws/amazon-ssm-agent"
+  git reset --hard
+  git fetch
+  git checkout "${SSM_VERSION}"
+
+  mkdir -p "$shome/bin"
+  case "$(uname -s)" in
+    Darwin)
+      make build-darwin
+      mv "$shome/vendor/src/github.com/aws/amazon-ssm-agent/bin/darwin_amd64/"{amazon-ssm-agent,ssm-cli} "$shome/bin/"
+      ;;
+    Linux)
+      make build-linux
+      mv "$shome/vendor/src/github.com/aws/amazon-ssm-agent/bin/linux_amd64/"{amazon-ssm-agent,ssm-cli} "$shome/bin/"
+      ;;
+  esac
+
+  #rm -rf "$shome/vendor"
 }
 
 main "$@"

@@ -1,3 +1,4 @@
 /vendor
 /bin/ssm-cli
 /bin/amazon-ssm-agent
+/.ssm-version

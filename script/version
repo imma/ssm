@@ -4,7 +4,7 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_ssm="$(cd "$shome/vendor/src/github.com/aws/amazon-ssm-agent" 2>/dev/null && git describe --abbrev=0 --tags)"
+  local ver_ssm="$(cat "$shome/.ssm-version" 2>/dev/null)"
   jq -n --arg ssm "$ver_ssm" '{ssm: $ssm}'
 }
 

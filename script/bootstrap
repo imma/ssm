@@ -24,7 +24,7 @@ function main {
       ;;
   esac
 
-  #rm -rf "$shome/vendor"
+  rm -rf "$shome/vendor"
 }
 
 main "$@"
